@@ -1,6 +1,6 @@
 [vai al file principlae](../../Readme.md)
 
-# 1 Lezione 24 Settember 2025
+# 1 Lezione 24 Settembre 2025
 
 ## Raspberry PI
 
