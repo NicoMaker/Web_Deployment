@@ -7,3 +7,8 @@
 ```bash
 sudo raspi-config # per modificare le impostazioni del sistema
 ```
+
+
+```bash
+ssh nome_utente@Password comando ssh per entrare nella raspberry pi
+```
