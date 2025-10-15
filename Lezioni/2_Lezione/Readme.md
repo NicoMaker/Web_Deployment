@@ -2,6 +2,8 @@
 
 # 2 Lezione 15 Ottobre 2025
 
-## Raspberry PI
+## Comandi per Linux
 
-System on chip e entrate e uscite digitali e analogiche
+```bash
+sudo raspi-config # per modificare le impostazioni del sistema
+```
