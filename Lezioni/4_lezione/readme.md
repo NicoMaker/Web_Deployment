@@ -36,3 +36,6 @@ apt-cache search nome servizio # per cercare il servizio
 sudo systemctl start nome_servizio # per attivare il servizio
 sudo systemctl status nome_servizio # per verificare lo stato del servizio
 ```
+
+
+- se funziona indirizzo ip macchina (raspberry pi) nel browser e vedi schermata di Apache2 
