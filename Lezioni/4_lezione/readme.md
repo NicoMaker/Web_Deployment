@@ -24,3 +24,10 @@ apt-get moo
 sudo apt-get install
 
 ```
+
+- come cercare servizio
+
+```bash
+apt-cache search nome servizio
+
+```
