@@ -13,21 +13,26 @@ ssh pi@indirizzo_ip  # per entrare nella raspberry pi
 - aggiornamento servizi
 
 ```bash
-sudo apt-get update 
-apt-get moo 
+
+sudo apt-get update  # per aggiornare i servizi
+apt-get moo  # per aggiornare il sistema
 ```
 
 - come installare servizio
 
 ```bash
-
-sudo apt-get install
-
+sudo apt-get install nome_servizio # per installare il servizio
 ```
 
 - come cercare servizio
 
 ```bash
-apt-cache search nome servizio
+apt-cache search nome servizio # per cercare il servizio
+```
 
+- attivazione servizio
+
+```bash
+sudo systemctl start nome_servizio # per attivare il servizio
+sudo systemctl status nome_servizio # per verificare lo stato del servizio
 ```
