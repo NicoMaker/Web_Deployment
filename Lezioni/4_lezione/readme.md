@@ -37,5 +37,10 @@ sudo systemctl start nome_servizio # per attivare il servizio
 sudo systemctl status nome_servizio # per verificare lo stato del servizio
 ```
 
+- se funziona indirizzo ip macchina (raspberry pi) nel browser e vedi schermata di Apache2
 
-- se funziona indirizzo ip macchina (raspberry pi) nel browser e vedi schermata di Apache2 
+## rinomina file
+
+```bash
+sudo mv index.html index1.html # per rinominare il file
+```
