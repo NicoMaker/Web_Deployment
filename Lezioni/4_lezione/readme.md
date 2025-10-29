@@ -9,3 +9,18 @@
 ssh pi@indirizzo_ip  # per entrare nella raspberry pi
 
 ```
+
+- aggiornamento servizi
+
+```bash
+sudo apt-get update 
+apt-get moo 
+```
+
+- come installare servizio
+
+```bash
+
+sudo apt-get install
+
+```
