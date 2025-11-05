@@ -1,209 +1,260 @@
-/* Globale e Reset */
+/* ======================================= */
+/* BASE E LAYOUT FULL SCREEN               */
+/* ======================================= */
 body {
     margin: 0;
     padding: 0;
-    background-color: #f7f9fc; /* Sfondo molto leggero */
+    background-color: #1a1a2e; /* Sfondo scuro per effetto "tech dashboard" */
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    color: #34495e; /* Testo grigio-blu scuro */
-    line-height: 1.6;
+    color: #e4e6eb; /* Testo chiaro */
 }
 
 .App {
-    padding: 40px;
-    max-width: 1300px;
+    padding: 15px; 
+    max-width: 98vw; /* OCCUPA QUASI TUTTO LO SCHERMO */
     margin: 0 auto;
 }
 
-/* Header e Banner */
-.header-professional {
-    background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Ombra elegante */
-    margin-bottom: 50px;
-    text-align: center;
-    border-left: 6px solid #007bff; /* Accento di colore principale */
+/* ======================================= */
+/* HEADER                                  */
+/* ======================================= */
+.header-professional.large-header {
+    background: linear-gradient(90deg, #2c3e50, #1f2a37);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+    border-bottom: 3px solid #3498db;
 }
 
-.header-professional h1 {
-    font-size: 2.4em;
-    color: #007bff;
-    margin: 0 0 5px 0;
+.large-header h1 {
+    font-size: 2.5em;
+    color: #3498db; 
     font-weight: 700;
 }
 
-.header-professional p {
-    color: #7f8c8d;
-    font-size: 1em;
-    font-weight: 300;
-}
-
-/* Griglia e Card (Dashboard) */
-.dashboard-grid {
+/* ======================================= */
+/* GRIGLIA PRINCIPALE (massima ampiezza)   */
+/* ======================================= */
+.main-content-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+    /* Struttura: [RAM|RAM|RAM] [ROM|ROM|ROM] [CPU|CPU|OS] */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
 }
 
-.stat-card {
-    background: #ffffff;
+/* Tutti i Box */
+.full-width-card, .half-card {
+    background: #2c3e50; 
     padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s;
-    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    border: 1px solid #34495e;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* Alloca le schede a tutta larghezza (RAM e ROM) */
+.full-width-card {
+    grid-column: 1 / span 3; 
 }
 
-.card-top-info {
+/* Alloca le schede sull'ultima riga */
+.info-box-cpu {
+    grid-column: 1 / span 2; /* CPU occupa 2 colonne */
+}
+
+.info-box-os {
+    grid-column: 3 / span 1; /* OS occupa 1 colonna */
+}
+
+
+/* ======================================= */
+/* FOCUS CARDS (RAM & ROM)                 */
+/* ======================================= */
+
+.card-title-bar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 15px;
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
-.info-icon {
-    font-size: 1.6em;
+.title-icon {
+    font-size: 1.8em;
     margin-right: 15px;
-    opacity: 0.8;
+    color: #2ecc71;
 }
 
-.stat-card h3 {
-    font-size: 1.3em;
-    color: #2c3e50;
-    margin: 0;
-    font-weight: 600;
-}
+.rom-icon { color: #f1c40f; } /* Colore per l'icona ROM */
+.ram-icon { color: #2ecc71; } /* Colore per l'icona RAM */
 
-/* RAM / Metriche Principali */
-.metric-display {
-    margin: 20px 0;
-}
-
-.metric-value {
-    font-size: 3em;
-    font-weight: 800;
-    color: #28a745; /* Verde moderno */
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.metric-label {
-    font-size: 1.2em;
-    color: #7f8c8d;
-    font-weight: 500;
-}
-
-/* Barra di Progresso */
-.progress-container {
-    background-color: #e9ecef;
+.total-tag {
+    background-color: #34495e;
+    padding: 5px 10px;
     border-radius: 5px;
-    height: 10px;
-    overflow: hidden;
-    margin: 10px 0 15px 0;
-}
-
-.progress-fill {
-    height: 100%;
-    background-color: #28a745; /* Verde in linea con il valore */
-    transition: width 0.5s ease-in-out;
-    border-radius: 5px;
-}
-
-.detail-line {
     font-size: 0.9em;
     color: #95a5a6;
-    margin: 0;
 }
 
-/* CPU / Dettagli */
+.ram-content-focus {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.ram-metric-large {
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 10px;
+    background-color: #34495e; 
+    min-width: 250px;
+}
+
+.large-gauge-value {
+    font-size: 4.5em; 
+    font-weight: 800;
+    color: #2ecc71; /* Default RAM */
+    line-height: 1;
+    display: block;
+}
+
+.large-gauge-label {
+    font-size: 1.2em;
+    color: #95a5a6;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Colori specifici RAM */
+.free-color { color: #f1c40f; } /* Giallo RAM Libera */
+.used-color { color: #e74c3c; } /* Rosso RAM Utilizzata */
+
+/* Colori specifici ROM/Disco */
+.disk-free-color { color: #f1c40f; } /* Giallo ROM Libera */
+.disk-used-color { color: #3498db; } /* Blu ROM Utilizzata */
+
+
+/* Barra di progresso a fondo card */
+.progress-bar-container.large-bottom {
+    height: 20px;
+    background-color: #1f2a37;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #2ecc71; /* Riempimento RAM */
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-bar-fill.disk-fill {
+    background-color: #3498db; /* Riempimento ROM */
+}
+
+/* ======================================= */
+/* Altri Stili (CPU/OS) - Nessuna modifica strutturale */
+/* ======================================= */
+
+.half-card h2 {
+    font-size: 1.4em;
+    color: #ecf0f1;
+}
+
 .cpu-model-line {
     font-size: 0.9em;
-    color: #555;
-    word-break: break-all;
-    margin-bottom: 25px;
-    background-color: #f7f9fc;
+    color: #95a5a6;
+    background-color: #34495e;
     padding: 8px;
-    border-radius: 4px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-.metric-group {
-    display: flex; /* Cambiato a flex per un layout compatto */
-    flex-wrap: wrap;
+.specs-row {
+    display: flex;
     gap: 15px;
 }
 
-.metric-box {
-    background-color: #f0f2f5;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-size: 0.9em;
-    flex-grow: 1; /* Permette alla scatola di crescere */
-    min-width: 120px;
+.spec-box {
+    background-color: #34495e;
+    padding: 15px;
+    border-radius: 8px;
+    flex: 1;
 }
 
-.metric-key {
-    color: #7f8c8d;
-    display: block;
-    font-size: 0.8em;
-    margin-bottom: 3px;
+.spec-value {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #f1c40f; 
 }
 
-.metric-value-small {
+/* Info Item */
+.info-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed #34495e;
+}
+
+.info-data {
+    font-size: 1em;
     font-weight: 600;
-    color: #34495e;
+    color: #ecf0f1;
 }
 
-/* Dettagli OS */
-.detail-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+.uptime-data {
+    color: #e74c3c; 
 }
 
-.detail-list p {
-    color: #7f8c8d;
-    margin: 0;
-    font-size: 0.9em;
-    font-weight: 500;
-}
-
-.detail-list strong {
-    color: #007bff;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-    border-left: 3px solid #007bff;
-    padding-left: 10px;
-    background-color: #f0f7ff;
-    border-radius: 4px;
-}
-
-/* Errori e Caricamento */
+/* Errori e caricamento */
 .error-panel {
     text-align: center;
-    color: #dc3545;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
+    color: #e74c3c;
+    background-color: #34495e;
+    border: 1px solid #c0392b;
     padding: 40px;
     border-radius: 10px;
+    margin-top: 50px;
 }
 
 .spinner {
-    border: 4px solid rgba(0, 123, 255, 0.2);
+    border: 4px solid rgba(52, 152, 219, 0.2);
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border-top-color: #007bff;
+    border-top-color: #3498db;
     animation: spin 1s linear infinite;
     margin: 50px auto 10px auto;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Media Queries (adattabilità) */
+@media (max-width: 1400px) {
+    .ram-metric-large {
+        min-width: 200px;
+    }
+    .large-gauge-value {
+        font-size: 3.5em;
+    }
+}
+
+@media (max-width: 1100px) {
+    .main-content-grid {
+        grid-template-columns: 1fr; /* Una sola colonna per schermi più piccoli */
+    }
+    .full-width-card, .half-card, .info-box-cpu, .info-box-os {
+        grid-column: 1 / span 1; 
+    }
+    .ram-content-focus {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .ram-metric-large {
+        min-width: 100%;
+    }
 }

@@ -1,30 +1,37 @@
 const express = require('express');
 const os = require('os');
-const cors = require('cors'); // Per permettere a React di accedere
+const cors = require('cors');
+const checkDiskSpace = require('check-disk-space').default; // Nuovo modulo
 const app = express();
-const PORT = 5000; // Porta standard per le API di backend
+const PORT = 5000; 
 
-// 1. Configurazione Middleware
-// Permette al frontend (React) di accedere ai dati
-// Sostituisci l'URL con l'indirizzo esatto del tuo frontend se non usi la porta 3000
+// Scegli il percorso del disco. Su Windows è "C:", su Linux/macOS è "/"
+const DISK_PATH = os.platform() === 'win32' ? 'C:' : '/';
+
+// Configurazione CORS
 app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:5173'] 
 }));
 app.use(express.json());
 
-// 2. Funzione per Raccogliere i Dati OS Completi
-const getOSInfo = () => {
-    // Calcoli di conversione (da byte a GB)
+// La funzione deve diventare ASINCRONA per usare checkDiskSpace
+const getOSInfo = async () => {
+    // --- RAM (Dati OS Nativi) ---
     const totalMemoryGB = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2);
     const freeMemoryGB = (os.freemem() / 1024 / 1024 / 1024).toFixed(2);
     const usedMemoryGB = (totalMemoryGB - freeMemoryGB).toFixed(2);
 
-    // Calcolo dell'Uptime (da secondi a giorni)
-    const uptimeSeconds = os.uptime();
-    const uptimeDays = (uptimeSeconds / 60 / 60 / 24).toFixed(1);
-
-    // Mappa le informazioni della CPU (usiamo solo i dati del primo core per il modello)
+    const uptimeDays = (os.uptime() / 60 / 60 / 24).toFixed(1);
     const cpus = os.cpus();
+
+    // --- ROM / DISK (Dati check-disk-space) ---
+    const diskInfo = await checkDiskSpace(DISK_PATH);
+    
+    // Calcoli di conversione (da byte a GB)
+    const totalDiskGB = (diskInfo.size / 1024 / 1024 / 1024).toFixed(2);
+    const freeDiskGB = (diskInfo.free / 1024 / 1024 / 1024).toFixed(2);
+    const usedDiskGB = (totalDiskGB - freeDiskGB).toFixed(2);
+
 
     return {
         // Generali
@@ -34,33 +41,36 @@ const getOSInfo = () => {
         release: os.release(),
         hostname: os.hostname(),
         uptimeDays: uptimeDays,
-        uptimeSeconds: uptimeSeconds, // utile per un monitoraggio più preciso
         
         // Memoria (RAM)
         totalMemoryGB: totalMemoryGB,
         freeMemoryGB: freeMemoryGB,
         usedMemoryGB: usedMemoryGB,
 
+        // ROM (Disco) - NOVITÀ!
+        diskPath: DISK_PATH,
+        totalDiskGB: totalDiskGB,
+        freeDiskGB: freeDiskGB,
+        usedDiskGB: usedDiskGB,
+
         // CPU
         cpuModel: cpus[0].model,
         cpuCores: cpus.length,
-        
-        // Utente
         userInfo: os.userInfo(),
-        
-        // Interfacce di Rete (potrebbe essere un output molto lungo)
-        // networkInterfaces: os.networkInterfaces() 
     };
 };
 
-// 3. Endpoint API
-app.get('/api/os-info', (req, res) => {
-    // Restituisce tutti i dati OS in formato JSON
-    res.json(getOSInfo());
+// Endpoint API - ora deve essere ASINCRONO
+app.get('/api/os-info', async (req, res) => {
+    try {
+        const data = await getOSInfo();
+        res.json(data);
+    } catch (error) {
+        console.error("Errore nel recupero dati disco:", error);
+        res.status(500).json({ error: "Impossibile recuperare i dati del disco." });
+    }
 });
 
-// 4. Avvio del Server
 app.listen(PORT, () => {
   console.log(`✅ Backend API Node.js avviato su http://localhost:${PORT}`);
-  console.log('API Endpoint: http://localhost:5000/api/os-info');
 });
