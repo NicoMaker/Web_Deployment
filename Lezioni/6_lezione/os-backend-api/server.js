@@ -5,8 +5,10 @@ const checkDiskSpace = require('check-disk-space').default; // Nuovo modulo
 const app = express();
 const PORT = 5000; 
 
-// Scegli il percorso del disco. Su Windows è "C:", su Linux/macOS è "/"
-const DISK_PATH = os.platform() === 'win32' ? 'C:' : '/';
+// Scegli il percorso del disco. 
+// Su Windows è "C:". Su Linux/macOS usiamo os.userInfo().homedir (es. "/home/pi")
+// per avere maggiore probabilità di accesso rispetto al root "/"
+const DISK_PATH = os.platform() === 'win32' ? 'C:' : os.userInfo().homedir;
 
 // Configurazione CORS
 app.use(cors({
@@ -25,6 +27,7 @@ const getOSInfo = async () => {
     const cpus = os.cpus();
 
     // --- ROM / DISK (Dati check-disk-space) ---
+    // NOTA: Il percorso è ora più compatibile con Linux
     const diskInfo = await checkDiskSpace(DISK_PATH);
     
     // Calcoli di conversione (da byte a GB)
@@ -66,11 +69,12 @@ app.get('/api/os-info', async (req, res) => {
         const data = await getOSInfo();
         res.json(data);
     } catch (error) {
-        console.error("Errore nel recupero dati disco:", error);
-        res.status(500).json({ error: "Impossibile recuperare i dati del disco." });
+        console.error("Errore nel recupero dati di sistema:", error);
+        res.status(500).json({ error: "Impossibile recuperare i dati del sistema. Controllare i permessi del disco su " + DISK_PATH });
     }
 });
 
 app.listen(PORT, () => {
   console.log(`✅ Backend API Node.js avviato su http://localhost:${PORT}`);
+  console.log(`⭐ Percorso Disco Monitorato: ${DISK_PATH}`);
 });
