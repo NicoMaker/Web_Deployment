@@ -10,9 +10,8 @@
 ## comando per uccidere comando/servizio processo
 
 ```bash
-
 sudo kill -9 id_processo # per uccidere il processo
-sudo kill all processo # per uccidere tutti i processi con quel nome
+sudo killall nome_processo # per uccidere tutti i processi con quel nome
 
 ```
 
