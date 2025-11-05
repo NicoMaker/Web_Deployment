@@ -19,5 +19,8 @@ sudo kill all processo # per uccidere tutti i processi con quel nome
 ## servizio con porte aperte
 
 ```bash
-sudo netstamp -tamp # per vedere tutti i servizi con porte aperte
+sudo netstat -tulpn # per vedere tutti i servizi con porte aperte (TCP e UDP)
+
+# Alternativa moderna e più veloce a netstat
+sudo ss -tulpn
 ```
