@@ -6,3 +6,18 @@
 
 - [Os Backend](os-backend-api)
 - [Os client](os-info-client)
+
+## comando per uccidere comando/servizio processo
+
+```bash
+
+sudo kill -9 id_processo # per uccidere il processo
+sudo kill all processo # per uccidere tutti i processi con quel nome
+
+```
+
+## servizio con porte aperte
+
+```bash
+sudo netstamp -tamp # per vedere tutti i servizi con porte aperte
+```
