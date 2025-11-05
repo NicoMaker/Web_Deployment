@@ -15,3 +15,8 @@ sudo apt-get install tree
 ```bash
 sudo cp -r nome_cartella_da_trasferire /var/www/html/nome_cartella parte html # per copiare la cartella -r tutto i dati dentro la prima cartella
 ```
+
+
+## Esercizi
+
+- [Reindirizzamento](index.html)
