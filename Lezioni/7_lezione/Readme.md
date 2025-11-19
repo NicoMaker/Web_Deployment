@@ -34,3 +34,11 @@ fortune | cowsay
 ```bash
 man cowsay
 ```
+
+## Avviamo Node-Red
+
+```bash
+node-red
+```
+
+installiamo in node-red dashboard
