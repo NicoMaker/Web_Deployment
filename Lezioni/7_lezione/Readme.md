@@ -19,3 +19,12 @@ h1story || more # per vedere tutti i comandi precedenti
 sudo apt-get install fortune
 sudo apt-get install cowsay
 ```
+
+
+## uso Fortune & Cowsay
+
+```bash
+fortune 
+cowsay ciao
+fortune | cowsay
+```
