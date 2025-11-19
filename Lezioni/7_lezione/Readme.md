@@ -2,7 +2,6 @@
 
 # 7 Lezione 19 Novembre 2025
 
-
 ## comando per vedere comandi precedenti
 
 ```bash
@@ -13,7 +12,6 @@ histroy 1 # per vedere il comando precedente
 
 h1story || more # per vedere tutti i comandi precedenti
 ```
-
 
 ## installazione fortune
 
