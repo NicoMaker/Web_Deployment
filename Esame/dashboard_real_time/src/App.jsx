@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { CssBaseline, Container, Paper, Typography, Grid, Box, Divider,
-  Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import {
+  CssBaseline, Container, Paper, Typography, Grid, Box, Divider,
+  Table, TableContainer, TableHead, TableRow, TableCell, TableBody
+} from "@mui/material";
 import MemoryIcon from "@mui/icons-material/Memory";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpeedIcon from "@mui/icons-material/Speed";
@@ -43,7 +45,7 @@ function App() {
           background: "linear-gradient(135deg, #a7f3d0 60%, #f3f4f6 100%)",
         }}>
           <Typography variant="h4" gutterBottom sx={{ fontWeight: 700, color: "#134e4a" }}>
-            Dashboard Risorse <span style={{ fontSize:20, color: "#94a3b8" }}>(OS: {osInfo.platform})</span>
+            Dashboard Risorse <span style={{ fontSize: 20, color: "#94a3b8" }}>(OS: {osInfo.platform})</span>
           </Typography>
           <Typography variant="subtitle2" sx={{ color: "#6b7280", mb: 2 }}>{osInfo.hostname}</Typography>
           <Divider sx={{ my: 2 }} />
@@ -53,7 +55,9 @@ function App() {
                 <MemoryIcon fontSize="large" color="primary" />
                 <Box ml={2}>
                   <Typography variant="body1" sx={{ fontWeight: 600, color: "#3b82f6" }}>RAM libera</Typography>
-                  <Typography variant="h5">{latest.ram} <span style={{fontSize:16, color:"#64748b"}}>MB</span></Typography>
+                  <Typography variant="h5">
+                    {latest.ram} <span style={{ fontSize: 16, color: "#64748b" }}>GB</span>
+                  </Typography>
                 </Box>
               </Box>
             </Grid>
@@ -62,7 +66,9 @@ function App() {
                 <StorageIcon fontSize="large" sx={{ color: "#16a34a" }} />
                 <Box ml={2}>
                   <Typography variant="body1" sx={{ fontWeight: 600, color: "#16a34a" }}>Disco libero</Typography>
-                  <Typography variant="h5">{latest.disk} <span style={{fontSize:16, color:"#64748b"}}>MB</span></Typography>
+                  <Typography variant="h5">
+                    {latest.disk} <span style={{ fontSize: 16, color: "#64748b" }}>GB</span>
+                  </Typography>
                 </Box>
               </Box>
             </Grid>
@@ -71,7 +77,9 @@ function App() {
                 <SpeedIcon fontSize="large" sx={{ color: "#f59e42" }} />
                 <Box ml={2}>
                   <Typography variant="body1" sx={{ fontWeight: 600, color: "#f59e42" }}>CPU</Typography>
-                  <Typography variant="h5">{latest.cpu} <span style={{fontSize:16, color:"#64748b"}}>%</span></Typography>
+                  <Typography variant="h5">
+                    {latest.cpu} <span style={{ fontSize: 16, color: "#64748b" }}>%</span>
+                  </Typography>
                 </Box>
               </Box>
             </Grid>
@@ -88,17 +96,16 @@ function App() {
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ fontWeight: 600 }}>Orario</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>RAM (MB)</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Disco (MB)</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>RAM (GB)</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Disco (GB)</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>CPU (%)</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {[...stats].reverse().map((row, i) => (
-                  <TableRow key={i}
-                    sx={i === 0 ? { backgroundColor: "#a7f3d0" } : {}}>
+                  <TableRow key={i} sx={i === 0 ? { backgroundColor: "#a7f3d0" } : {}}>
                     <TableCell>
-                      <span style={{ fontFamily:"'Fira Mono', monospace" }}>{row.time}</span>
+                      <span style={{ fontFamily: "'Fira Mono', monospace" }}>{row.time}</span>
                     </TableCell>
                     <TableCell>{row.ram}</TableCell>
                     <TableCell>{row.disk}</TableCell>

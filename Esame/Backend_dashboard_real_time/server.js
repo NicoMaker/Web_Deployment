@@ -10,7 +10,7 @@ const io = socketIo(server, { cors: { origin: "*" } });
 
 function getOSInfo() {
   return {
-    platform: os.platform(), // win32, linux
+    platform: os.platform(),
     release: os.release(),
     hostname: os.hostname(),
   };
@@ -22,10 +22,14 @@ function getStats(callback) {
   if (platform === "win32") {
     exec('wmic OS get FreePhysicalMemory /Value', (err, stdout) => {
       const memMatch = stdout.match(/FreePhysicalMemory=(\d+)/);
-      const ram = memMatch ? Math.round(Number(memMatch[1]) / 1024) : null; // in MB
+      // RAM libera da KB → GB
+      const ram = memMatch ? +(Number(memMatch[1]) / 1024 / 1024).toFixed(2) : null;
+
       exec('wmic LogicalDisk where DeviceID="C:" get FreeSpace /Value', (err2, stdout2) => {
         const diskMatch = stdout2.match(/FreeSpace=(\d+)/);
-        const disk = diskMatch ? Math.round(Number(diskMatch[1]) / (1024 * 1024)) : null; // in MB
+        // Disco libero da byte → GB
+        const disk = diskMatch ? +(Number(diskMatch[1]) / (1024 * 1024 * 1024)).toFixed(2) : null;
+
         exec('wmic cpu get loadpercentage /value', (err3, stdout3) => {
           const cpuMatch = stdout3.match(/LoadPercentage=(\d+)/);
           const cpu = cpuMatch ? Number(cpuMatch[1]) : null;
@@ -35,9 +39,15 @@ function getStats(callback) {
     });
   } else {
     exec(`free -m | awk '/Mem:/ {print $4}'`, (err, stdout) => {
-      const ram = parseInt(stdout.trim(), 10) || null;
+      const ramMb = parseInt(stdout.trim(), 10);
+      // RAM libera da MB → GB
+      const ram = ramMb ? +(ramMb / 1024).toFixed(2) : null;
+
       exec(`df -m / | awk 'NR==2 {print $4}'`, (err2, stdout2) => {
-        const disk = parseInt(stdout2.trim(), 10) || null;
+        const diskMb = parseInt(stdout2.trim(), 10);
+        // Disco libero da MB → GB
+        const disk = diskMb ? +(diskMb / 1024).toFixed(2) : null;
+
         exec(`top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}'`, (err3, stdout3) => {
           let cpu = parseFloat(stdout3.trim());
           if (isNaN(cpu)) cpu = null;
