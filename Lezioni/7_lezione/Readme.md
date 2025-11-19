@@ -28,3 +28,9 @@ fortune
 cowsay ciao
 fortune | cowsay
 ```
+
+## uso manuale cowsay
+
+```bash
+man cowsay
+```
