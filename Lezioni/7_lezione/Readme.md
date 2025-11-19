@@ -13,8 +13,9 @@ histroy 1 # per vedere il comando precedente
 h1story || more # per vedere tutti i comandi precedenti
 ```
 
-## installazione fortune
+## installazione fortune & cowsay
 
 ```bash
 sudo apt-get install fortune
+sudo apt-get install cowsay
 ```
