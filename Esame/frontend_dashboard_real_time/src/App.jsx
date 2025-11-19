@@ -11,6 +11,13 @@ import io from "socket.io-client";
 
 const MAX_POINTS = 60;
 
+// Funzioni formato
+const formatDecimal = (num) =>
+  typeof num === "number" ? num.toFixed(2) : "0.00";
+
+const formatInt = (num) =>
+  typeof num === "number" ? Math.round(num) : "0";
+
 function App() {
   const [stats, setStats] = useState([]);
   const [osInfo, setOsInfo] = useState({});
@@ -56,7 +63,7 @@ function App() {
                 <Box ml={2}>
                   <Typography variant="body1" sx={{ fontWeight: 600, color: "#3b82f6" }}>RAM libera</Typography>
                   <Typography variant="h5">
-                    {latest.ram} <span style={{ fontSize: 16, color: "#64748b" }}>GB</span>
+                    {formatDecimal(latest.ram)} <span style={{ fontSize: 16, color: "#64748b" }}>GB</span>
                   </Typography>
                 </Box>
               </Box>
@@ -67,7 +74,7 @@ function App() {
                 <Box ml={2}>
                   <Typography variant="body1" sx={{ fontWeight: 600, color: "#16a34a" }}>Disco libero</Typography>
                   <Typography variant="h5">
-                    {latest.disk} <span style={{ fontSize: 16, color: "#64748b" }}>GB</span>
+                    {formatDecimal(latest.disk)} <span style={{ fontSize: 16, color: "#64748b" }}>GB</span>
                   </Typography>
                 </Box>
               </Box>
@@ -78,7 +85,7 @@ function App() {
                 <Box ml={2}>
                   <Typography variant="body1" sx={{ fontWeight: 600, color: "#f59e42" }}>CPU</Typography>
                   <Typography variant="h5">
-                    {latest.cpu} <span style={{ fontSize: 16, color: "#64748b" }}>%</span>
+                    {formatInt(latest.cpu)} <span style={{ fontSize: 16, color: "#64748b" }}>%</span>
                   </Typography>
                 </Box>
               </Box>
@@ -107,9 +114,9 @@ function App() {
                     <TableCell>
                       <span style={{ fontFamily: "'Fira Mono', monospace" }}>{row.time}</span>
                     </TableCell>
-                    <TableCell>{row.ram}</TableCell>
-                    <TableCell>{row.disk}</TableCell>
-                    <TableCell>{row.cpu}</TableCell>
+                    <TableCell>{formatDecimal(row.ram)}</TableCell>
+                    <TableCell>{formatDecimal(row.disk)}</TableCell>
+                    <TableCell>{formatInt(row.cpu)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
