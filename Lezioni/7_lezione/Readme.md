@@ -13,3 +13,10 @@ histroy 1 # per vedere il comando precedente
 
 h1story || more # per vedere tutti i comandi precedenti
 ```
+
+
+## installazione fortune
+
+```bash
+sudo apt-get install fortune
+```
