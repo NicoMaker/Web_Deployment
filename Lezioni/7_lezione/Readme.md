@@ -10,7 +10,7 @@ history
 history 5 # per vedere i 5 comandi precedenti
 histroy 1 # per vedere il comando precedente
 
-h1story || more # per vedere tutti i comandi precedenti
+history || more # per vedere tutti i comandi precedenti
 ```
 
 ## installazione fortune & cowsay
