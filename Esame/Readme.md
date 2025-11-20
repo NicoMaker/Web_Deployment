@@ -16,6 +16,8 @@ Il Backend si trova nella cartella: `Backend_dashboard_real_time`.
     cd Backend_dashboard_real_time
     ```
 
+    [Backend_dashboard_real_time](Backend_dashboard_real_time)
+
 2.  **Installa** le dipendenze necessarie (da eseguire solo la prima volta o dopo modifiche al file `package.json`).
     _Questo comando scarica tutti i pacchetti necessari per il funzionamento del server._
 
@@ -47,6 +49,8 @@ Il Frontend (l'interfaccia utente/dashboard) si trova nella cartella: `frontend_
     ```bash
     cd frontend_dashboard_real_time
     ```
+
+    [frontend_dashboard_real_time](frontend_dashboard_real_time
 
 3.  **Installa** le dipendenze necessarie (da eseguire solo la prima volta o dopo modifiche al file `package.json`).
     _Questo comando scarica tutti i pacchetti necessari per la costruzione e l'esecuzione dell'interfaccia utente._
